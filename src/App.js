@@ -1,26 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
+import {HashRouter as Router,Route,Switch} from 'react-router-dom';
+
+import PrivateRoute from './PrivateRoute';
+import Home from './Home'
+import NoMatch from './NoMatch'
+import Login from './Login'
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <Router basename="/echo">
+            <div className="entryWrap">
+                <Switch>
+                    <Route path="/login" component={Login} exact/>
+                    <PrivateRoute path="/" component={Home} exact/>
+                    <Route component={NoMatch}/>
+                </Switch>
+            </div>
+        </Router>
+    );
 }
 
 export default App;
